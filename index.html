@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>File Converter</h1>
+    <p>Convert files entirely in your browser — nothing is uploaded anywhere</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Drop zone -->
+    <div class="dropzone" id="dz">
+      <input type="file" id="fi" multiple accept="image/*,.txt,.csv,.json,.xml,.html,.md">
+      <span class="dropzone-icon"></span>
+      <h2>Drop files here or click to browse</h2>
+      <p>Images, text, data — all processing happens locally</p>
+      <div class="formats">
+        <span class="badge">JPG</span>
+        <span class="badge">PNG</span>
+        <span class="badge">WebP</span>
+        <span class="badge">GIF</span>
+        <span class="badge">BMP</span>
+        <span class="badge">ICO</span>
+        <span class="badge">TXT</span>
+        <span class="badge">JSON</span>
+        <span class="badge">CSV</span>
+        <span class="badge">XML</span>
+        <span class="badge">HTML</span>
+        <span class="badge">MD</span>
+      </div>
+    </div>
+
+    <!-- File list -->
+    <div class="files-list" id="lst"></div>
+
+    <!-- Bulk action bar -->
+    <div class="actions" id="act" style="display:none">
+      <span class="pill" id="pil"></span>
+      <div style="display:flex;gap:10px">
+        <button class="btn-clear" onclick="clrAll()">Clear all</button>
+        <button class="btn-convert-all" onclick="convAll()">Convert all</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="converter.js"></script>
+</body>
+
+</html>

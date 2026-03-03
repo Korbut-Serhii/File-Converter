@@ -1,0 +1,350 @@
+/* ═══════════════════════════════════════
+   RESET & CUSTOM PROPERTIES
+═══════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:       #0f0f13;
+  --surface:  #1a1a24;
+  --surface2: #22222f;
+  --border:   #2e2e42;
+  --accent:   #6c63ff;
+  --green:    #34d399;
+  --red:      #f87171;
+  --yellow:   #fbbf24;
+  --text:     #e2e2f0;
+  --muted:    #7878a0;
+  --radius:   14px;
+}
+
+/* ═══════════════════════════════════════
+   BASE LAYOUT
+═══════════════════════════════════════ */
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 80px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+header p {
+  color: var(--muted);
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+}
+
+/* ═══════════════════════════════════════
+   DROP ZONE
+═══════════════════════════════════════ */
+.dropzone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 56px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  background: var(--surface);
+  position: relative;
+}
+
+.dropzone:hover,
+.dropzone.over {
+  border-color: var(--accent);
+  background: #1e1e30;
+  box-shadow: 0 0 40px #6c63ff22;
+}
+
+/* The hidden file input covers the entire drop zone, making the whole area clickable */
+.dropzone input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.dropzone-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.dropzone h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.dropzone p {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* ── Supported format badges ── */
+.formats {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.badge {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════
+   FILE LIST
+═══════════════════════════════════════ */
+.files-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Each file is represented as a card row */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 44px 1fr auto auto auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.card:hover {
+  border-color: #3e3e5a;
+}
+
+/* Coloured format icon badge */
+.ficon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+/* File name and metadata */
+.finfo h3 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.finfo .meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* Status row (dot + label) */
+.srow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  margin-top: 3px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot.ready { background: var(--muted); }
+.dot.going  { background: var(--yellow); animation: pulse 1s infinite; }
+.dot.done   { background: var(--green); }
+.dot.err    { background: var(--red); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Download link shown after successful conversion */
+.download-link {
+  color: var(--green);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.download-link:hover {
+  text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════
+   CONTROLS — FORMAT SELECT, BUTTONS
+═══════════════════════════════════════ */
+
+/* Target format selector */
+select.select-format {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  outline: none;
+  min-width: 105px;
+  cursor: pointer;
+}
+
+select.select-format:focus {
+  border-color: var(--accent);
+}
+
+/* Per-file convert button */
+.btn-go {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-go:hover {
+  background: #5a52e0;
+  transform: translateY(-1px);
+}
+
+.btn-go:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Per-file delete button */
+.btn-delete {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.btn-delete:hover {
+  color: var(--red);
+}
+
+/* ═══════════════════════════════════════
+   BULK ACTION BAR
+═══════════════════════════════════════ */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* File count pill */
+.pill {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* "Convert all" primary CTA */
+.btn-convert-all {
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 20px #6c63ff40;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-convert-all:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px #6c63ff55;
+}
+
+.btn-convert-all:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* "Clear all" secondary button */
+.btn-clear {
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-clear:hover {
+  color: var(--text);
+  border-color: #4e4e6a;
+}
