@@ -6,7 +6,6 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)
 ![No Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-blue)
 ![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
 
 ---
